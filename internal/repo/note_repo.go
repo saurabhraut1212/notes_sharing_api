@@ -104,6 +104,15 @@ func (r *NoteRepo) ListPublic(ctx context.Context, page, limit int) ([]models.No
 	return notes, cur.Err()
 }
 
+func (r *NoteRepo) GetById(ctx context.Context, id primitive.ObjectID) (*models.Note, error) {
+	var n models.Note
+	err := r.col.FindOne(ctx, bson.M{"_id": id}).Decode(&n)
+	if err == mongo.ErrNoDocuments {
+		return nil, nil
+	}
+	return &n, err
+}
+
 func (r *NoteRepo) Update(ctx context.Context, id primitive.ObjectID, update bson.M) (*models.Note, error) {
 	update["updated_at"] = time.Now().UTC()
 	opts := options.FindOneAndUpdate().SetReturnDocument(options.After)
