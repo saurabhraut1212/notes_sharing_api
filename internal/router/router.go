@@ -26,9 +26,13 @@ func Setup(client *mongo.Client, cfg *config.Config) *fiber.App {
 
 	api := app.Group("/api")
 
+	//helth
+	app.Get("/", func(c *fiber.Ctx) error { return c.SendString("Server running") })
+	app.Get("/health", func(c *fiber.Ctx) error { return c.SendString("OK") })
+
 	// auth
-	api.Post("/auth/register", authH.Register)
-	api.Post("/auth/login", authH.Login)
+	api.Post("/register", authH.Register)
+	api.Post("/login", authH.Login)
 
 	// notes (protected for create/update/delete)
 	api.Post("/notes", middleware.RequireAuth(cfg), noteH.CreateNote)

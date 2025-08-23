@@ -17,9 +17,9 @@ type Config struct {
 func Load() *Config {
 	_ = godotenv.Load()
 	return &Config{
-		MongoURI:  mustEnv("Mongo_URI"),
+		MongoURI:  mustEnv("MONGO_URI"),
 		DBName:    getEnv("DB_Name", "dbNotes"),
-		Port:      getEnv("Port", "8080"),
+		Port:      getEnv("PORT", "8080"),
 		JWTSecret: mustEnv("JWT_SECRET"),
 	}
 }
