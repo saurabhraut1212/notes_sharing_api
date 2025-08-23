@@ -18,7 +18,7 @@ func Load() *Config {
 	_ = godotenv.Load()
 	return &Config{
 		MongoURI:  mustEnv("Mongo_URI"),
-		DBName:    getEnv("DBName", "dbNotes"),
+		DBName:    getEnv("DB_Name", "dbNotes"),
 		Port:      getEnv("Port", "8080"),
 		JWTSecret: mustEnv("JWT_SECRET"),
 	}

@@ -18,7 +18,7 @@ type NoteHandler struct {
 	Config   *config.Config
 }
 
-func NewNoteHandle(noteRepo *repo.NoteRepo, cfg *config.Config) *NoteHandler {
+func NewNoteHandler(noteRepo *repo.NoteRepo, cfg *config.Config) *NoteHandler {
 	return &NoteHandler{
 		NoteRepo: noteRepo,
 		Config:   cfg,
